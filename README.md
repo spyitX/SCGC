@@ -1,2 +1,5 @@
 # SCGC
 ForSCGCPropose
+
+
+ForSCG only
