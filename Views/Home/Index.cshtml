@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+
+    <h1 class="display-4">Welcome This is HOME For searching (In memory cache)</h1>
+
+    <input type="text" name="txt" placeholder="กรุณากรอกข้อมูล" value="กรุณาป้อนสินค้าที่ต้องการค้นหา">
+    <input type="button" value="ค้นหา" >
+
+    
+    <script> //this is the script for test
+        async function getDataFromAPI() {
+            let response = await fetch('https://ghibliapi.herokuapp.com/films')
+            let rawdata = await response.text()
+            let data = JSON.parse(rawdata)
+            console.log(rawData)
+            data.forEach(temp=> {
+                console.log(temp.producer)
+            });
+        }
+    </script>
+    <button onclick="getDataFromAPI()">Load</button>
+
+    <script language="C#" runat ="Server">
+        /*void Page_Load(Object Src, EventArgs E) {
+            Response.Cache.SetExpires(DateTime.Now.AddSeconds(60));
+            Response.Cache.SetCacheability(HttpCacheability.Public);
+            Response.Cache.SetValidUntilExpires(true);
+
+            Response.Cache.VaryByParams["ProductID;CustomerID"]=true;
+        } */
+        //testing C# running
+        //Console.WriteLine("Hello World");
+
+        /*
+        private void BindSelectPanel(){
+            DataSet ProductDataSet;
+            if(Cache["ProductDataSet"]!=null) {
+                // Retrive from cache
+                ProductDataSet=(DataSet)Cache["ProductDataSet"];
+
+            }
+            else {
+                // if not have data in cache, retrive new one from DB and keep data in cache
+                ProductDataSet=((DataSet)DAL.GetProductList()).Tables[0];
+                Cache.Insert("ProductDataSet",
+                ProductDataSet,
+                new System.Web.Caching.CacheDependency(Server.MapPath("NorthWind97.mdb")),
+                DateTime.Now.AddMinutes(5),
+                System.Web.Caching.Cache.NoSlidingExpiration);
+            }
+            ProductList.DataSource=ProductDataSet;
+            ProductList.Databind();
+          
+          
+        }  */
+
+    </script>
+
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
